@@ -6,6 +6,14 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="articles-wrapper">
+      <%data.forEach(function(elm){ %>
+        <h3>title: <%= elm.title %><h3>
+        <p><%= elm.body %><p>
+        <p><%= elm.author %><p>
+        <p><%= elm.tags %><p>
+        <p><%= elm.categories %><p>
+      <%})%>
+    </div>
   </body>
 </html>
