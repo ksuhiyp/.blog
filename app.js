@@ -9,8 +9,8 @@ var db = require('./bin/db');
 //end of helper modules 
 
 //Routers
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/indexRouter');
+var usersRouter = require('./routes/usersRouter');
 var articleRouter = require('./routes/articleRouter');
 
 var app = express();
