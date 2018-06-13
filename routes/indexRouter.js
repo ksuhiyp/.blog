@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 const articles = require('../models/articleModel')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  articles.getArticles(function(err,data){
-    if (err){throw err}
-    res.render('index', { data: data,title: 'Articles' });
-});
+router.get('/', function (req, res, next) {
+  articles.getArticles(function (err, data) {
+    if (err) {
+      throw err
+    }
+    res.status(200).json(data);
+  });
 });
 
 
