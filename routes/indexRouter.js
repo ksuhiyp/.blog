@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
     if (err) {
       throw err
     }
-    res.status(200).json(data);
+    res.status(200).render('index.ejs',{'title':'blog','data':data});
   });
 });
 
@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 module.exports = router;
 
 
-/**TODO: 
- * refer to windsberg article about 
- * static express routing or find a way to 
+/**TODO:
+ * refer to windsberg article about
+ * static express routing or find a way to
  * make layout*/
