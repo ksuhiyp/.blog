@@ -51,4 +51,8 @@ const userModel = mongoose.Schema({
   }
 
 })
-//TODO: make REST work
+const users = module.exports = mongoose.model('users', userModel);
+
+
+
+//TODO: implemnt patch and put

@@ -2,55 +2,67 @@ var express = require('express');
 var router = express.Router();
 const articles = require('../models/articleModel');
 
-/**finds article by 
+/**finds article by
  * @_:id
  * in headers
  * returns
  * whole article Object  */
-router.get('/', function (req, res, next) {
-  articles.getArticleById(req.headers._id, (err, article) => {
-    if (err)
-      throw err;
-    res.json(article);
-  })
+router.get('/', function(req, res, next) {
+  if (req.headers._id)
+    articles.getArticleById(req.headers._id, (err, article) => {
+      if (err)
+        throw err;
+      res.json(article);
+    })
+  else {
+    articles.getArticles(function(err, articles) {
+      if (err) {
+        throw err
+      }
+      res.status(200).json(articles);
+    });
+  }
 });
+
 /**Posts article, currently piped to dummy data generator in articleModel.js
- * Params @article 
+ * Params @article
  * returns Object
  */
-router.post('/', function (req, res, next) {
-  articles.postArticle(function (err, article) {
+router.post('/', function(req, res, next) {
+  articles.postArticle(function(err, article) {
     if (err)
-      throw err;
+      res.status(500).json(err);
     res.status(200).json(article);
   })
 });
-/**Deletes first article matches @cond 
+/**Deletes first article matches @cond
  * returns deleted Object if done
  */
-router.delete('/', function (req, res, next) {
+router.delete('/', function(req, res, next) {
   if (req.body._id.length > 1)
-    articles.deleteMany(req.body._id, function (err, article) {
+    articles.deleteMany(req.body._id, function(err, article) {
       if (err)
-        throw err;
-      res.json(article);
+        res.status(500).json(err);
+      res.status(200).json(article);
     });
   else
-    articles.deleteOne(req.param._id, function (err, article) {
+    articles.deleteOne(req.param._id, function(err, article) {
       if (err)
-        throw err;
-      res.json(article);
+        res.status(500).json(err);
+      res.status(200).json(article);
 
     });
 });
-router.put('/', function (req, res) {
+router.put('/', function(req, res) {
   var id = req.headers._id;
   var update = req.body.body
-  articles.findByIdAndUpdate(id, {"body":update}, function (err, article) {
+  articles.findByIdAndUpdate(id, {
+    "body": update
+  }, function(err, article) {
     if (err)
       res.status(500).json(err);
     else
-      res.json(article);
+      res.status(200).json(article);
 
   });
 });

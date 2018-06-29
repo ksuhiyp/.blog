@@ -58,15 +58,16 @@ module.exports.postArticle = (callback) => {
   })
   Article.create(randomObject, callback)
 }
-module.exports.deleteOneArticle = function (cond, callback) {
+module.exports.deleteOneArticle = function(cond, callback) {
   Article.deleteOne(cond, callback);
 }
-module.exports.deleteManyArticles = function(query, callback){
+module.exports.deleteManyArticles = function(query, callback) {
   Article.deleteMany(query, callback);
 }
-module.exports.updateArticle = function(id, callback){
-  Article.findByIdAndUpdate(id,update,options,callback);
+module.exports.updateArticle = function(id, callback) {
+  Article.findByIdAndUpdate(id, update, options, callback);
 }
 
 /**TODO:
+seperate REST work into a contrller dir
  */
