@@ -29,11 +29,14 @@ router.get('/', function(req, res, next) {
  * returns Object
  */
 router.post('/', function(req, res, next) {
-  articles.postArticle(function(err, article) {
-    if (err)
-      res.status(500).json(err);
-    res.status(200).json(article);
-  })
+  let body = req.body;
+  console.log(body);
+  // articles.postArticle(body,function(err, body) {
+  //   if (err)
+  //     res.status(500).json(err);
+  //   else
+  //     res.status(200).json(body);
+  // })
 });
 /**Deletes first article matches @cond
  * returns deleted Object if done

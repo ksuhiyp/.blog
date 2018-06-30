@@ -51,12 +51,12 @@ module.exports.getArticles = (callback, limit) => {
 module.exports.getArticleById = (id, callback) => {
   Article.findById(id, callback);
 }
-module.exports.postArticle = (callback) => {
+module.exports.postArticle = (article) => {
   let randomObject = dummy(Article, {
     ignore: ignoredFields,
     returnDate: true
   })
-  Article.create(randomObject, callback)
+  Article.create(article)
 }
 module.exports.deleteOneArticle = function(cond, callback) {
   Article.deleteOne(cond, callback);

@@ -1,12 +1,13 @@
- //begin of helper modules 
+ //begin of helper modules
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var db = require('./bin/db');
-//end of helper modules 
+//end of helper modules
 
 //Routers
 var indexRouter = require('./routes/indexRouter');
@@ -25,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser)
 app.use('/', indexRouter);
 app.use('/article', articleRouter);
 app.use('/users', usersRouter);
