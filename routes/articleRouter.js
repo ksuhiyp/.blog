@@ -31,37 +31,46 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   let body = req.body;
   console.log(body);
-  // articles.postArticle(body,function(err, body) {
-  //   if (err)
-  //     res.status(500).json(err);
-  //   else
-  //     res.status(200).json(body);
-  // })
+  articles.postArticle(body, function(err, body) {
+    if (err)
+      res.status(500).json(err);
+    else
+      res.status(200).json(body);
+  })
 });
 /**Deletes first article matches @cond
  * returns deleted Object if done
  */
+//TODO:to check wiered behaviour of delete one when there is no succefull deletion
 router.delete('/', function(req, res, next) {
-  if (req.body._id.length > 1)
-    articles.deleteMany(req.body._id, function(err, article) {
+  if (req.body._id) {
+    console.log(req.body._id);
+    articles.deleteMany({
+      _id: {
+        $in: req.body._id
+      }
+    }, function(err, article) {
       if (err)
-        res.status(500).json(err);
+        res.status(500).json(req);
       res.status(200).json(article);
     });
-  else
-    articles.deleteOne(req.param._id, function(err, article) {
+  } else {
+    console.log(req.query._id);
+    articles.deleteOneArticle({
+      _id: req.query._id
+    }, function(err) {
       if (err)
-        res.status(500).json(err);
-      res.status(200).json(article);
+        res.status(500).json();
+      res.status(200);
 
     });
+  }
 });
 router.put('/', function(req, res) {
-  var id = req.headers._id;
-  var update = req.body.body
-  articles.findByIdAndUpdate(id, {
-    "body": update
-  }, function(err, article) {
+  var id = req.query._id;
+  var update = req.body
+  articles.updateArticle(id, update, null, function(err, article) {
+    console.log(id, update);
     if (err)
       res.status(500).json(err);
     else

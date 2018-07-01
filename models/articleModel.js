@@ -51,21 +51,21 @@ module.exports.getArticles = (callback, limit) => {
 module.exports.getArticleById = (id, callback) => {
   Article.findById(id, callback);
 }
-module.exports.postArticle = (article) => {
+module.exports.postArticle = (article, callback) => {
   let randomObject = dummy(Article, {
     ignore: ignoredFields,
     returnDate: true
   })
-  Article.create(article)
+  Article.create(randomObject, callback)
 }
-module.exports.deleteOneArticle = function(cond, callback) {
-  Article.deleteOne(cond, callback);
+module.exports.deleteOneArticle = function(query, callback) {
+  Article.deleteOne(query, callback);
 }
 module.exports.deleteManyArticles = function(query, callback) {
   Article.deleteMany(query, callback);
 }
-module.exports.updateArticle = function(id, callback) {
-  Article.findByIdAndUpdate(id, update, options, callback);
+module.exports.updateArticle = function(id, update, options, callback) {
+  Article.findByIdAndUpdate(id, update, callback);
 }
 
 /**TODO:
