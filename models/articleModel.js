@@ -68,6 +68,7 @@ module.exports.updateArticle = function(id, update, options, callback) {
   Article.findByIdAndUpdate(id, update, callback);
 }
 
+
 /**TODO:
 seperate REST work into a contrller dir
  */

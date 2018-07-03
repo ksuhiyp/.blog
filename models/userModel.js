@@ -4,14 +4,15 @@ Admins only can grant access to this model
 
 */
 const mongoose = require('mongoose');
-const userModel = mongoose.Schema({
+const schema = new mongoose.Schema({
   userName: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   firstName: {
     type: String,
-    required: true
+    required: false
   },
   middleName: {
     type: String,
@@ -19,19 +20,20 @@ const userModel = mongoose.Schema({
   },
   lastName: {
     type: String,
-    required: true
+    required: false
   },
-  hash: {
+  password: {
     type: String,
     required: true
   },
   profilePicture: {
     type: String,
-    required: flase
+    required: false
   },
   email: {
     type: String,
-    required: true
+    required: false,
+    unique: true
   },
   twitter: {
     type: String,
@@ -39,20 +41,21 @@ const userModel = mongoose.Schema({
   },
   country: {
     type: String,
-    required: flase
+    required: false
   },
   language: {
     type: String,
-    required: true
+    required: false
   },
   mobile: {
     type: String,
     required: false
   }
 
-})
-const users = module.exports = mongoose.model('users', userModel);
+});
 
-
-
-//TODO: implemnt patch and put
+const userModel = module.exports = mongoose.model('user', schema);
+exports.createUser = (user) => {
+  let newUser = new userModel(user);
+  newUser.save(err, callback)
+}
