@@ -54,8 +54,11 @@ const schema = new mongoose.Schema({
 
 });
 
-const userModel = module.exports = mongoose.model('user', schema);
-exports.createUser = (user) => {
-  let newUser = new userModel(user);
+const user = module.exports = mongoose.model('user', schema);
+module.exports.createUser = (entity) => {
+  let newUser = new user(entity);
   newUser.save(err, callback)
+}
+module.exports.findUser = (query,callback) => {
+  user.findOne(query, callback)
 }
