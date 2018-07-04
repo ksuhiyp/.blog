@@ -53,12 +53,16 @@ const schema = new mongoose.Schema({
   }
 
 });
-
+//TODO salt the pass using bcrypt
 const user = module.exports = mongoose.model('user', schema);
 module.exports.createUser = (entity) => {
   let newUser = new user(entity);
   newUser.save(err, callback)
 }
-module.exports.findUser = (query,callback) => {
+module.exports.findUser = (query, callback) => {
   user.findOne(query, callback)
+}
+module.exports.comparePassword = (password, userPassword, callback) => {
+  if (password == userPassword)
+    callback(null,true);
 }

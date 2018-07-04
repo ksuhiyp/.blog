@@ -6,11 +6,12 @@
  const logger = require('morgan');
  const mongoose = require('mongoose');
  const passport = require('passport');
+ const authintication = require('./auth/local-auth')(passport)
  const session = require('express-session');
  const db = require('./config/db');
  const app = express();
- const flash = require('flash');
- const userRouter = require('./routes/userRouter')
+ const flash    = require('connect-flash');
+ const userRouter = require('./routes/userRouter')(passport)
  // view engine setup
  app.set('views', path.join(__dirname, 'views'));
  app.set('view engine', 'ejs');
@@ -20,6 +21,7 @@
  app.use(express.urlencoded({
    extended: false
  }));
+ app.use(flash());
 
  //static dir
  app.use(express.static(path.join(__dirname, 'public')));
@@ -28,11 +30,12 @@
  //session
  app.use(session({
    secret: 'stray',
-   resave: false,
-   saveUninitialized: false
+   resave: true,
+   saveUninitialized: true
  }));
  app.use(flash())
-
+ app.use(passport.initialize());
+ app.use(passport.session());
  //Routers
  app.use('/', require('./routes/indexRouter'));
  app.use('/article', require('./routes/articleRouter'));
