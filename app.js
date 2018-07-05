@@ -7,10 +7,11 @@
  const mongoose = require('mongoose');
  const passport = require('passport');
  const authintication = require('./auth/local-auth')(passport)
+ const cookieParser = require('cookie-parser');
  const session = require('express-session');
  const db = require('./config/db');
  const app = express();
- const flash    = require('connect-flash');
+ const flash = require('connect-flash');
  const userRouter = require('./routes/userRouter')(passport)
  // view engine setup
  app.set('views', path.join(__dirname, 'views'));
@@ -21,25 +22,30 @@
  app.use(express.urlencoded({
    extended: false
  }));
- app.use(flash());
 
  //static dir
  app.use(express.static(path.join(__dirname, 'public')));
 
  app.use(bodyParser.json());
  //session
+ app.use(cookieParser());
  app.use(session({
    secret: 'stray',
-   resave: true,
-   saveUninitialized: true
+   resave: false,
+   saveUninitialized: false
  }));
  app.use(flash())
  app.use(passport.initialize());
  app.use(passport.session());
  //Routers
+ // app.all('*', ensureLoggedIn.ensureLoggedIn('/user/login'), (req, res, next) => {
+ //   console.log('te');
+ //   next();
+ // });
  app.use('/', require('./routes/indexRouter'));
  app.use('/article', require('./routes/articleRouter'));
- app.use('/user', require('./routes/userRouter')(app, mongoose, passport));
+ app.use('/auth', require('./routes/authRouter')());
+ app.use('/user', require('./routes/userRouter')());
  // error handler
  app.use(function(err, req, res, next) {
    // set locals, only providing error in development
@@ -50,4 +56,6 @@
    res.status(err.status || 500);
    res.render('error');
  });
+
+
  module.exports = app;

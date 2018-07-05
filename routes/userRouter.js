@@ -1,23 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/userModel')
-const passport = require('passport')
+const passport = require('passport');
+const ensureLoggedIn = require('../auth/ensureLoggedIn')
+
 module.exports = () => {
 
-  router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-  }));
-  router.post('/', (req, res, next) => {
-    let body = req.body
-    user = new userModel(body);
-    user.save((err, user) => {
-      if (err)
-        res.status(200).json(err);
-      else
-        res.status(200).json(user)
-    })
+
+  router.all('*', ensureLoggedIn(), (req, res, next) => {
+    console.log(req.isAuthenticated());
+    next();
   });
 
   //below method seemed to handle user id type of queries only noting that model is capable to handle any query

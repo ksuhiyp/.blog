@@ -1,13 +1,19 @@
 var express = require('express');
 var router = express.Router();
 const articles = require('../models/articleModel');
+const ensureLoggedIn = require('connect-ensure-login')
 
 /**finds article by
  * @_:id
  * in headers
  * returns
  * whole article Object  */
+
+router.all('*', ensureLoggedIn.ensureLoggedIn('/auth/login'), (req, res, next) => {
+  next();
+});
 router.get('/', function(req, res, next) {
+  console.log(req.flash())
   if (req.headers._id)
     articles.getArticleById(req.headers._id, (err, article) => {
       if (err)

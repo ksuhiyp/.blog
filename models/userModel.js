@@ -64,5 +64,8 @@ module.exports.findUser = (query, callback) => {
 }
 module.exports.comparePassword = (password, userPassword, callback) => {
   if (password == userPassword)
-    callback(null,true);
+    callback(null, true);
+  else {
+    callback(null, false)
+  }
 }
