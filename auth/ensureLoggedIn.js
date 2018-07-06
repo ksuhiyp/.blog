@@ -38,8 +38,12 @@ module.exports = function ensureLoggedIn() {
   return function(req, res, next) {
     if (!req.isAuthenticated || !req.isAuthenticated()) {
       console.log(req.isAuthenticated());
-       res.status(401).json({'message':'false'});
-       return
+      res.status(401).json({
+        'Authorized': 'false',
+        'signin': '/user/login',
+        'signup': '/user/register'
+      });
+      return
     }
     next();
   }
