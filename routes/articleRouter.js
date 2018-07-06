@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const articles = require('../models/articleModel');
-const ensureLoggedIn = require('connect-ensure-login')
+const ensureLoggedIn = require('../auth/ensureLoggedIn')
 
 /**finds article by
  * @_:id
@@ -9,7 +9,7 @@ const ensureLoggedIn = require('connect-ensure-login')
  * returns
  * whole article Object  */
 
-router.all('*', ensureLoggedIn.ensureLoggedIn('/auth/login'), (req, res, next) => {
+router.all('*', ensureLoggedIn('/auth/login'), (req, res, next) => {
   next();
 });
 router.get('/', function(req, res, next) {
