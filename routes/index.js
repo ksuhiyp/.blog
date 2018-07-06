@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const articles = require('../models/articleModel')
+const articles = require('../models/article')
 /* GET home page. */
 router.get('/', function (req, res, next) {
   articles.getArticles(function (err, data) {

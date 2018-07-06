@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('../models/userModel')
+const user = require('../models/user')
 const passport = require('passport')
 module.exports = () => {
   router.post('/login', passport.authenticate('local-login'), (req, res, next) => {
@@ -9,7 +9,7 @@ module.exports = () => {
   })
   router.post('/', (req, res, next) => {
     let body = req.body
-    user = new userModel(body);
+    user = new user(body);
     user.save((err, user) => {
       if (err)
         res.status(200).json(err);
