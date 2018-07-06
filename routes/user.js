@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userModel = require('../models/userModel')
+const user = require('../models/user')
 const passport = require('passport');
 const ensureLoggedIn = require('../auth/ensureLoggedIn')
 
@@ -15,7 +15,7 @@ module.exports = () => {
   //below method seemed to handle user id type of queries only noting that model is capable to handle any query
   router.get('/:userId', (req, res, next) => {
 
-    userModel.findUser({
+    user.findUser({
       "_id": req.params.userId
     }, (err, user) => {
       if (err)

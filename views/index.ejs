@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <div class="articles-wrapper">
-      <%data.forEach(function(elm){ %>
-        <h3>title: <%= elm.title %><h3>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <div class="articles-wrapper">
+    <%data.forEach(function(elm){ %>
+      <h3>title: <%= elm.title %><h3>
         <p><%= elm.body %><p>
         <p><%= elm.author %><p>
         <p><%= elm.tags %><p>

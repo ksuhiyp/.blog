@@ -1,4 +1,5 @@
  // helper modules
+ // TODO: use es6 import instead of node require
  const express = require('express');
  const createError = require('http-errors');
  const path = require('path');
@@ -12,7 +13,7 @@
  const db = require('./config/db');
  const app = express();
  const flash = require('connect-flash');
- const userRouter = require('./routes/userRouter')(passport)
+ const user = require('./routes/user')(passport)
  // view engine setup
  app.set('views', path.join(__dirname, 'views'));
  app.set('view engine', 'ejs');
@@ -37,15 +38,11 @@
  app.use(flash())
  app.use(passport.initialize());
  app.use(passport.session());
- //Routers
- // app.all('*', ensureLoggedIn.ensureLoggedIn('/user/login'), (req, res, next) => {
- //   console.log('te');
- //   next();
- // });
- app.use('/', require('./routes/indexRouter'));
- app.use('/article', require('./routes/articleRouter'));
- app.use('/auth', require('./routes/authRouter')());
- app.use('/user', require('./routes/userRouter')());
+
+ app.use('/', require('./routes/index'));
+ app.use('/article', require('./routes/article'));
+ app.use('/auth', require('./routes/auth')());
+ app.use('/user', require('./routes/user')());
  // error handler
  app.use(function(err, req, res, next) {
    // set locals, only providing error in development

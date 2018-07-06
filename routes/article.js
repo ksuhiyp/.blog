@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const articles = require('../models/articleModel');
+const articles = require('../models/article');
 const ensureLoggedIn = require('../auth/ensureLoggedIn')
 
 /**finds article by
@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
   }
 });
 
-/**Posts article, currently piped to dummy data generator in articleModel.js
+/**Posts article, currently piped to dummy data generator in article.js
  * Params @article
  * returns Object
  */

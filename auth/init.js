@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/userModel');
+const User = require('../models/user');
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
