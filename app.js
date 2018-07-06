@@ -38,11 +38,7 @@
  app.use(flash())
  app.use(passport.initialize());
  app.use(passport.session());
- //Routers
- // app.all('*', ensureLoggedIn.ensureLoggedIn('/user/login'), (req, res, next) => {
- //   console.log('te');
- //   next();
- // });
+
  app.use('/', require('./routes/index'));
  app.use('/article', require('./routes/article'));
  app.use('/auth', require('./routes/auth')());
