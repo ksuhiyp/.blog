@@ -14,6 +14,20 @@ const $_documentContainer = document.createElement('template');
 $_documentContainer.innerHTML = `<dom-module id="shared-styles">
   <template>
     <style>
+    .wrapper-btns {
+    margin-top: 15px;
+}
+paper-button.link {
+    color: #757575;
+}
+.alert-error {
+    background: #ffcdd2;
+    border: 1px solid #f44336;
+    border-radius: 3px;
+    color: #333;
+    font-size: 14px;
+    padding: 10px;
+}
       .card {
         margin: 24px;
         padding: 16px;
@@ -23,17 +37,27 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
       }
 
-      .circle {
-        display: inline-block;
-        width: 64px;
-        height: 64px;
-        text-align: center;
-        color: #555;
-        border-radius: 50%;
-        background: #ddd;
-        font-size: 30px;
-        line-height: 64px;
-      }
+      :root {
+  --primary-color: #4285f4;
+}
+a,
+paper-button {
+  font-weight: bold;
+}
+a {
+  color: var(--primary-color);
+}
+paper-button {
+  color: #fff;
+}
+paper-button.primary {
+  background: var(--primary-color);
+}
+blockquote {
+  border-left: 4px solid #eee;
+  margin-left: 4px;
+  padding-left: 20px;
+}
 
       h1 {
         margin: 16px 0;

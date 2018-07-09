@@ -8,11 +8,14 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {
+  PolymerElement,
+  html
+} from '@polymer/polymer/polymer-element.js';
 
-class MyView404 extends PolymerElement {
+class NotFound extends PolymerElement {
   static get template() {
-    return html`
+    return html `
       <style>
         :host {
           display: block;
@@ -26,4 +29,4 @@ class MyView404 extends PolymerElement {
   }
 }
 
-window.customElements.define('my-view404', MyView404);
+window.customElements.define('not-found', NotFound);

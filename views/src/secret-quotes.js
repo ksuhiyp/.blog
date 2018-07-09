@@ -7,13 +7,14 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {
+  PolymerElement,
+  html
+} from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
-
-class MyView2 extends PolymerElement {
+class SecretQuotes extends PolymerElement {
   static get template() {
-    return html`
+    return html `
       <style include="shared-styles">
         :host {
           display: block;
@@ -23,13 +24,12 @@ class MyView2 extends PolymerElement {
       </style>
 
       <div class="card">
-        <div class="circle">2</div>
-        <h1>View Two</h1>
-        <p>Ea duis bonorum nec, falli paulo aliquid ei eum.</p>
-        <p>Id nam odio natum malorum, tibique copiosae expetenda mel ea.Detracto suavitate repudiandae no eum. Id adhuc minim soluta nam.Id nam odio natum malorum, tibique copiosae expetenda mel ea.</p>
+        <div class="circle">3</div>
+        <h1>View Three</h1>
+        <p>Modus commodo minimum eum te, vero utinam assueverit per eu.</p>
+        <p>Ea duis bonorum nec, falli paulo aliquid ei eum.Has at minim mucius aliquam, est id tempor laoreet.Pro saepe pertinax ei, ad pri animal labores suscipiantur.</p>
       </div>
     `;
   }
 }
-
-window.customElements.define('my-view2', MyView2);
+window.customElements.define('secret-quotes', SecretQuotes);
